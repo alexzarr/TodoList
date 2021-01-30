@@ -29,7 +29,8 @@ extension MockDataManager: DataManagerProtocol {
         includingCompleted ? tasks : tasks.filter { !$0.isCompleted }
     }
     
-    func add(task: TLTask) {
+    func addTask(title: String) {
+        let task = TLTask(title: title)
         tasks.insert(task, at: 0)
     }
     
