@@ -15,10 +15,15 @@ struct TaskListView: View {
     var body: some View {
         NavigationView {
             List(viewModel.tasks) { task in
-                Text(task.title)
+                Button(action: {
+                    viewModel.toggleIsCompleted(for: task)
+                }) {
+                    TaskRow(task: task)
+                }
             }
+            .animation(.easeIn)
             .navigationTitle(Text("Tasks"))
-            .navigationBarItems(trailing: addNewButton)
+            .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         }
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
             viewModel.fetchTasks()
@@ -36,6 +41,14 @@ struct TaskListView: View {
         }, label: {
             Image(systemName: "plus")
         })
+    }
+    
+    private var showCompletedButton: some View {
+        Button (action: {
+            viewModel.showCompleted.toggle()
+        }) {
+            Image(systemName: viewModel.showCompleted ? "text.justify" : "text.badge.checkmark")
+        }
     }
 }
 

@@ -17,7 +17,11 @@ protocol TaskListViewModelProtocol {
 
 final class TaskListViewModel: ObservableObject {
     @Published var tasks: [TLTask] = []
-    @Published var showCompleted = false
+    @Published var showCompleted = false {
+        didSet {
+            fetchTasks()
+        }
+    }
     
     private let dataManager: DataManagerProtocol
     
@@ -35,5 +39,6 @@ extension TaskListViewModel: TaskListViewModelProtocol {
     
     func toggleIsCompleted(for task: TLTask) {
         dataManager.toggleIsCompleted(for: task)
+        fetchTasks()
     }
 }
