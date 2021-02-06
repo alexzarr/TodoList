@@ -19,6 +19,14 @@
 		A0226BE425BFA6E6006C7395 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0226BE225BFA6E6006C7395 /* TaskListViewModel.swift */; };
 		A049A05D25CB486E00415C2D /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A05C25CB486E00415C2D /* TaskRow.swift */; };
 		A049A05E25CB486E00415C2D /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A05C25CB486E00415C2D /* TaskRow.swift */; };
+		A049A06825CB502F00415C2D /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A06725CB502F00415C2D /* DBHelper.swift */; };
+		A049A06925CB502F00415C2D /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A06725CB502F00415C2D /* DBHelper.swift */; };
+		A049A06D25CB51B500415C2D /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A06C25CB51B500415C2D /* CoreDataHelper.swift */; };
+		A049A06E25CB51B500415C2D /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A049A06C25CB51B500415C2D /* CoreDataHelper.swift */; };
+		A053307125CC905200E2E111 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */; };
+		A053307225CC905200E2E111 /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */; };
+		A053307925CC910B00E2E111 /* TaskEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A053307825CC910B00E2E111 /* TaskEntity.swift */; };
+		A053307A25CC910B00E2E111 /* TaskEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A053307825CC910B00E2E111 /* TaskEntity.swift */; };
 		A0CBD38425C5E2BD00506845 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */; };
 		A0CBD38525C5E2BD00506845 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */; };
 		A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38825C5E48D00506845 /* NewTaskView.swift */; };
@@ -41,6 +49,10 @@
 		A0226BDB25BFA58F006C7395 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A0226BE225BFA6E6006C7395 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		A049A05C25CB486E00415C2D /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		A049A06725CB502F00415C2D /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		A049A06C25CB51B500415C2D /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		A053307025CC905200E2E111 /* TodoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoList.xcdatamodel; sourceTree = "<group>"; };
+		A053307825CC910B00E2E111 /* TaskEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntity.swift; sourceTree = "<group>"; };
 		A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
 		A0CBD38825C5E48D00506845 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		A0D8AE5225BFC4100073CD39 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
@@ -130,8 +142,20 @@
 			isa = PBXGroup;
 			children = (
 				A0226BDB25BFA58F006C7395 /* DataManager.swift */,
+				A053307525CC90FC00E2E111 /* Persistence */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		A053307525CC90FC00E2E111 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A049A06725CB502F00415C2D /* DBHelper.swift */,
+				A049A06C25CB51B500415C2D /* CoreDataHelper.swift */,
+				A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */,
+				A053307825CC910B00E2E111 /* TaskEntity.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		A0D8AE5725BFC4A10073CD39 /* Mocks */ = {
@@ -243,11 +267,15 @@
 				A0226BD425BFA53D006C7395 /* TLTask.swift in Sources */,
 				A0226BDC25BFA58F006C7395 /* DataManager.swift in Sources */,
 				A0226BE325BFA6E6006C7395 /* TaskListViewModel.swift in Sources */,
+				A053307925CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */,
 				A0D8AE5925BFC4B10073CD39 /* MockDataManager.swift in Sources */,
 				A049A05D25CB486E00415C2D /* TaskRow.swift in Sources */,
+				A049A06825CB502F00415C2D /* DBHelper.swift in Sources */,
+				A049A06D25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
 				A0226BC225BFA424006C7395 /* TodoListApp.swift in Sources */,
 				A0D8AE5325BFC4100073CD39 /* TaskListView.swift in Sources */,
+				A053307125CC905200E2E111 /* TodoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,11 +287,15 @@
 				A0226BD525BFA53D006C7395 /* TLTask.swift in Sources */,
 				A0226BDD25BFA58F006C7395 /* DataManager.swift in Sources */,
 				A0226BE425BFA6E6006C7395 /* TaskListViewModel.swift in Sources */,
+				A053307A25CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38A25C5E48D00506845 /* NewTaskView.swift in Sources */,
 				A0D8AE5A25BFC4B10073CD39 /* MockDataManager.swift in Sources */,
 				A049A05E25CB486E00415C2D /* TaskRow.swift in Sources */,
+				A049A06925CB502F00415C2D /* DBHelper.swift in Sources */,
+				A049A06E25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
 				A0226BC325BFA424006C7395 /* TodoListApp.swift in Sources */,
 				A0D8AE5425BFC4100073CD39 /* TaskListView.swift in Sources */,
+				A053307225CC905200E2E111 /* TodoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +537,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A053307025CC905200E2E111 /* TodoList.xcdatamodel */,
+			);
+			currentVersion = A053307025CC905200E2E111 /* TodoList.xcdatamodel */;
+			path = TodoList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A0226BAA25BFA421006C7395 /* Project object */;
 }

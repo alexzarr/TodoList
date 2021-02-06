@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol DataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool) -> [TLTask]
@@ -20,25 +21,46 @@ extension DataManagerProtocol {
 class DataManager {
     static let shared: DataManagerProtocol = DataManager()
     
-    private var tasks: [TLTask] = []
+    private var dbHelper: CoreDataHelper = .shared
     
     private init() { }
+    
+    private func fetchTaskEntity(for task: TLTask) -> TaskEntity? {
+        let predicate = NSPredicate(format: "id == %@", task.id as CVarArg)
+        let result = dbHelper.readFirst(TaskEntity.self, predicate: predicate)
+        switch result {
+        case .success(let taskEntity):
+            return taskEntity
+        case .failure:
+            return nil
+        }
+    }
 }
 
 // MARK: - DataManagerProtocol
 extension DataManager: DataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool) -> [TLTask] {
-        includingCompleted ? tasks : tasks.filter { !$0.isCompleted }
+        let predicate = includingCompleted ? nil : NSPredicate(format: "isCompleted == false")
+        let result: Result<[TaskEntity], Error> = dbHelper.read(TaskEntity.self, predicate: predicate, limit: nil)
+        switch result {
+        case .success(let taskEntities):
+            return taskEntities.map { $0.convertToTLTask() }
+        case .failure(let error):
+            fatalError(error.localizedDescription)
+        }
     }
     
     func addTask(title: String) {
-        let task = TLTask(title: title)
-        tasks.insert(task, at: 0)
+        let entity = TaskEntity.entity()
+        let newTask = TaskEntity(entity: entity, insertInto: dbHelper.context)
+        newTask.id = UUID()
+        newTask.title = title
+        dbHelper.create(newTask)
     }
     
     func toggleIsCompleted(for task: TLTask) {
-        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].isCompleted.toggle()
-        }
+        guard let taskEntity = fetchTaskEntity(for: task) else { return }
+        taskEntity.isCompleted.toggle()
+        dbHelper.update(taskEntity)
     }
 }
