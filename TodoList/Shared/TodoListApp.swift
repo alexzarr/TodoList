@@ -18,5 +18,12 @@ struct TodoListApp: App {
             TaskListView()
                 .environment(\.managedObjectContext, coreDataHelper.persistentContainer.viewContext)
         }
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .background:
+                coreDataHelper.saveContext()
+            default: break
+            }
+        }
     }
 }

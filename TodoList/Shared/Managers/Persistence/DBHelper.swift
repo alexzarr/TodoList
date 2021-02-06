@@ -20,6 +20,6 @@ protocol DBHelper {
 
 extension DBHelper {
     func read(_ objectType: DBObject.Type, predicate: DBPredicate? = nil, limit: Int? = nil) -> Result<[DBObject], Error> {
-        read(objectType, predicate: predicate, limit: limit)
+        return read(objectType, predicate: predicate, limit: limit)
     }
 }
