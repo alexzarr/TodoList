@@ -8,15 +8,22 @@
 import Foundation
 import CoreData
 
-protocol DataManagerProtocol {
+protocol TaskDataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool) -> [TLTask]
     func addTask(title: String)
     func toggleIsCompleted(for task: TLTask)
 }
 
-extension DataManagerProtocol {
+extension TaskDataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool = false) -> [TLTask] { fetchTaskList(includingCompleted: includingCompleted) }
 }
+
+protocol ListDataManagerProtocol {
+    func fetchLists() -> [TLList]
+    func addList(title: String)
+}
+
+typealias DataManagerProtocol = TaskDataManagerProtocol & ListDataManagerProtocol
 
 class DataManager {
     static let shared: DataManagerProtocol = DataManager()
@@ -37,8 +44,8 @@ class DataManager {
     }
 }
 
-// MARK: - DataManagerProtocol
-extension DataManager: DataManagerProtocol {
+// MARK: - TaskDataManagerProtocol
+extension DataManager: TaskDataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool) -> [TLTask] {
         let predicate = includingCompleted ? nil : NSPredicate(format: "isCompleted == false")
         let result: Result<[TaskEntity], Error> = dbHelper.read(TaskEntity.self, predicate: predicate, limit: nil)
@@ -62,5 +69,16 @@ extension DataManager: DataManagerProtocol {
         guard let taskEntity = fetchTaskEntity(for: task) else { return }
         taskEntity.isCompleted.toggle()
         dbHelper.update(taskEntity)
+    }
+}
+
+// MARK: - ListDataManagerProtocol
+extension DataManager: ListDataManagerProtocol {
+    func fetchLists() -> [TLList] {
+        []
+    }
+    
+    func addList(title: String) {
+        //
     }
 }

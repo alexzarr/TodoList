@@ -13,18 +13,16 @@ struct TaskListView: View {
     @State private var isShowingAddNew = false
     
     var body: some View {
-        NavigationView {
-            List(viewModel.tasks) { task in
-                Button(action: {
-                    viewModel.toggleIsCompleted(for: task)
-                }) {
-                    TaskRow(task: task)
-                }
+        List(viewModel.tasks) { task in
+            Button(action: {
+                viewModel.toggleIsCompleted(for: task)
+            }) {
+                TaskRow(task: task)
             }
-            .animation(.easeIn)
-            .navigationTitle(Text("Tasks"))
-            .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         }
+        .animation(.easeIn)
+        .navigationTitle(Text("Tasks"))
+        .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
             viewModel.fetchTasks()
         }) {
@@ -57,6 +55,9 @@ struct TaskListView_Previews: PreviewProvider {
         TaskListViewModel(dataManager: MockDataManager())
     }
     static var previews: some View {
-        TaskListView(viewModel: viewModel)
+        NavigationView {
+            TaskListView(viewModel: viewModel)
+                .navigationTitle(Text("Tasks"))
+        }
     }
 }

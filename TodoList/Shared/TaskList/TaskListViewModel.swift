@@ -23,9 +23,9 @@ final class TaskListViewModel: ObservableObject {
         }
     }
     
-    private let dataManager: DataManagerProtocol
+    private let dataManager: TaskDataManagerProtocol
     
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    init(dataManager: TaskDataManagerProtocol = DataManager.shared) {
         self.dataManager = dataManager
         fetchTasks()
     }

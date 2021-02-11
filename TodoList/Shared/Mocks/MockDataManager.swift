@@ -10,6 +10,8 @@ import Foundation
 class MockDataManager {
     private var tasks: [TLTask] = []
     
+    private var lists: [TLList] = []
+    
     init() {
         tasks = [
             TLTask(id: UUID(), title: "Morning workout", isCompleted: false),
@@ -20,11 +22,17 @@ class MockDataManager {
             TLTask(id: UUID(), title: "Finish article", isCompleted: true),
             TLTask(id: UUID(), title: "Pay bills", isCompleted: true),
         ]
+        
+        let listNames = ["Groceries", "Things To Do", "Vacation Plans"]
+        for name in listNames {
+            let listTasks = Array(tasks.prefix((0...tasks.count).randomElement()!))
+            lists.append(TLList(title: name, tasks: listTasks))
+        }
     }
 }
 
-// MARK: - DataManagerProtocol
-extension MockDataManager: DataManagerProtocol {
+// MARK: - TaskDataManagerProtocol
+extension MockDataManager: TaskDataManagerProtocol {
     func fetchTaskList(includingCompleted: Bool) -> [TLTask] {
         includingCompleted ? tasks : tasks.filter { !$0.isCompleted }
     }
@@ -38,5 +46,16 @@ extension MockDataManager: DataManagerProtocol {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].isCompleted.toggle()
         }
+    }
+}
+
+extension MockDataManager: ListDataManagerProtocol {
+    func fetchLists() -> [TLList] {
+        lists
+    }
+    
+    func addList(title: String) {
+        let list = TLList(title: title)
+        lists.insert(list, at: 0)
     }
 }
