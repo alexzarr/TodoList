@@ -25,13 +25,13 @@ struct NewTaskView: View {
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Cancel")
+                        .padding(.vertical, 8.0)
+                        .padding(.horizontal, 16.0)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .background(Color("Background"))
+                        .cornerRadius(8.0)
+                        .shadow(color: .secondary, radius: 3, x: 0.0, y: 0.0)
                 }
-                .padding(.vertical, 8.0)
-                .padding(.horizontal, 16.0)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(8.0)
-                .shadow(color: .gray, radius: 3, x: 0.0, y: 0.0)
                 
                 Button(action: {
                     if !title.isEmpty {
@@ -40,13 +40,14 @@ struct NewTaskView: View {
                     }
                 }) {
                     Text("Add")
+                        .padding(.vertical, 8.0)
+                        .padding(.horizontal, 16.0)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .background(Color("Background"))
+                        .cornerRadius(8.0)
+                        .shadow(color: .secondary, radius: 3, x: 0.0, y: 0.0)
                 }
-                .padding(.vertical, 8.0)
-                .padding(.horizontal, 16.0)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .background(Color.white)
-                .cornerRadius(8.0)
-                .shadow(color: .gray, radius: 3, x: 0.0, y: 0.0)
+                
             }
         }
         .padding()
