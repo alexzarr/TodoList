@@ -22,10 +22,13 @@ final class TaskListViewModel: ObservableObject {
             fetchTasks()
         }
     }
+    var title: String { list.title }
     
-    private let dataManager: DataManagerProtocol
+    let list: TLList
+    private let dataManager: TaskDataManagerProtocol
     
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    init(list: TLList, dataManager: TaskDataManagerProtocol = DataManager.shared) {
+        self.list = list
         self.dataManager = dataManager
         fetchTasks()
     }
@@ -34,7 +37,7 @@ final class TaskListViewModel: ObservableObject {
 // MARK: - TaskListViewModelProtocol
 extension TaskListViewModel: TaskListViewModelProtocol {
     func fetchTasks() {
-        tasks = dataManager.fetchTaskList(includingCompleted: showCompleted)
+        tasks = dataManager.fetchTaskList(for: list, includingCompleted: showCompleted)
     }
     
     func toggleIsCompleted(for task: TLTask) {

@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct TLTask: Identifiable {
+struct TLTask {
     var id = UUID()
     var title: String
     var isCompleted = false
+    var list: TLList?
+    var addedOn = Date()
 }
+
+// MARK: - Identifiable
+extension TLTask: Identifiable { }

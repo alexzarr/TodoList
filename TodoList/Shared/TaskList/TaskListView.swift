@@ -8,27 +8,25 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject var viewModel = TaskListViewModel()
+    @StateObject var viewModel: TaskListViewModel
     
     @State private var isShowingAddNew = false
     
     var body: some View {
-        NavigationView {
-            List(viewModel.tasks) { task in
-                Button(action: {
-                    viewModel.toggleIsCompleted(for: task)
-                }) {
-                    TaskRow(task: task)
-                }
+        List(viewModel.tasks) { task in
+            Button(action: {
+                viewModel.toggleIsCompleted(for: task)
+            }) {
+                TaskRow(task: task)
             }
-            .animation(.easeIn)
-            .navigationTitle(Text("Tasks"))
-            .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         }
+        .animation(.easeIn)
+        .navigationTitle(viewModel.title)
+        .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
             viewModel.fetchTasks()
         }) {
-            NewTaskView()
+            NewTaskView(viewModel: .init(list: viewModel.list))
         }
         .onAppear {
             viewModel.fetchTasks()
@@ -54,9 +52,12 @@ struct TaskListView: View {
 
 struct TaskListView_Previews: PreviewProvider {
     static var viewModel: TaskListViewModel {
-        TaskListViewModel(dataManager: MockDataManager())
+        TaskListViewModel(list: TLList(title: "Groceries"), dataManager: MockDataManager())
     }
     static var previews: some View {
-        TaskListView(viewModel: viewModel)
+        NavigationView {
+            TaskListView(viewModel: viewModel)
+                .navigationTitle(Text("Tasks"))
+        }
     }
 }

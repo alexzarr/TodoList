@@ -8,15 +8,23 @@
 import Foundation
 import CoreData
 
-protocol DataManagerProtocol {
-    func fetchTaskList(includingCompleted: Bool) -> [TLTask]
-    func addTask(title: String)
+protocol TaskDataManagerProtocol {
+    func fetchTaskList(for list: TLList?, includingCompleted: Bool) -> [TLTask]
+    func addTask(title: String, to list: TLList?)
     func toggleIsCompleted(for task: TLTask)
 }
 
-extension DataManagerProtocol {
-    func fetchTaskList(includingCompleted: Bool = false) -> [TLTask] { fetchTaskList(includingCompleted: includingCompleted) }
+extension TaskDataManagerProtocol {
+    func fetchTaskList(for list: TLList? = nil, includingCompleted: Bool = false) -> [TLTask] { fetchTaskList(for: list, includingCompleted: includingCompleted) }
+    func addTask(title: String, to list: TLList? = nil) { addTask(title: title, to: list) }
 }
+
+protocol ListDataManagerProtocol {
+    func fetchLists() -> [TLList]
+    func addList(title: String)
+}
+
+typealias DataManagerProtocol = TaskDataManagerProtocol & ListDataManagerProtocol
 
 class DataManager {
     static let shared: DataManagerProtocol = DataManager()
@@ -35,12 +43,30 @@ class DataManager {
             return nil
         }
     }
+    
+    private func fetchListEntity(for list: TLList) -> ListEntity? {
+        let predicate = NSPredicate(format: "id == %@", argumentArray: [list.id])
+        let result = dbHelper.readFirst(ListEntity.self, predicate: predicate)
+        switch result {
+        case .success(let entity):
+            return entity
+        case .failure:
+            return nil
+        }
+    }
 }
 
-// MARK: - DataManagerProtocol
-extension DataManager: DataManagerProtocol {
-    func fetchTaskList(includingCompleted: Bool) -> [TLTask] {
-        let predicate = includingCompleted ? nil : NSPredicate(format: "isCompleted == false")
+// MARK: - TaskDataManagerProtocol
+extension DataManager: TaskDataManagerProtocol {
+    func fetchTaskList(for list: TLList? = nil, includingCompleted: Bool = false) -> [TLTask] {
+        var predicates: [NSPredicate] = []
+        if let listId = list?.id {
+            predicates.append(NSPredicate(format: "list.id == %@", argumentArray: [listId]))
+        }
+        if !includingCompleted {
+            predicates.append(NSPredicate(format: "isCompleted == false"))
+        }
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         let result: Result<[TaskEntity], Error> = dbHelper.read(TaskEntity.self, predicate: predicate, limit: nil)
         switch result {
         case .success(let taskEntities):
@@ -50,11 +76,15 @@ extension DataManager: DataManagerProtocol {
         }
     }
     
-    func addTask(title: String) {
+    func addTask(title: String, to list: TLList? = nil) {
         let entity = TaskEntity.entity()
         let newTask = TaskEntity(entity: entity, insertInto: dbHelper.context)
         newTask.id = UUID()
         newTask.title = title
+        newTask.addedOn = Date()
+        if let list = list, let listEntity = fetchListEntity(for: list) {
+            newTask.list = listEntity
+        }
         dbHelper.create(newTask)
     }
     
@@ -62,5 +92,28 @@ extension DataManager: DataManagerProtocol {
         guard let taskEntity = fetchTaskEntity(for: task) else { return }
         taskEntity.isCompleted.toggle()
         dbHelper.update(taskEntity)
+    }
+}
+
+// MARK: - ListDataManagerProtocol
+extension DataManager: ListDataManagerProtocol {
+    func fetchLists() -> [TLList] {
+        let result: Result<[ListEntity], Error> = dbHelper.read(ListEntity.self, predicate: nil, limit: nil)
+        switch result {
+        case .success(let listEntities):
+            return listEntities.map { $0.convertToTLList() }
+        case .failure(let error):
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func addList(title: String) {
+        let entity = ListEntity.entity()
+        let newList = ListEntity(entity: entity, insertInto: dbHelper.context)
+        newList.id = UUID()
+        newList.title = title
+        newList.addedOn = Date()
+        newList.tasks = Set()
+        dbHelper.create(newList)
     }
 }

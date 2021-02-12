@@ -13,10 +13,12 @@ final class TaskEntity: NSManagedObject {
     @NSManaged var id: UUID?
     @NSManaged var title: String
     @NSManaged var isCompleted: Bool
+    @NSManaged var addedOn: Date
+    @NSManaged var list: ListEntity?
 }
 
 extension TaskEntity {
     func convertToTLTask() -> TLTask {
-        TLTask(id: id ?? UUID(), title: title, isCompleted: isCompleted)
+        TLTask(id: id ?? UUID(), title: title, isCompleted: isCompleted, addedOn: addedOn)
     }
 }
