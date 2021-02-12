@@ -10,6 +10,8 @@ import SwiftUI
 struct MyListsView: View {
     @StateObject var viewModel = MyListsViewModel()
     
+    @State private var isShowingAddNew = false
+    
     var body: some View {
         NavigationView {
             List(viewModel.lists) { list in
@@ -20,10 +22,24 @@ struct MyListsView: View {
                     })
             }
             .navigationTitle(Text("Lists"))
+            .navigationBarItems(trailing: addNewButton)
+        }
+        .sheet(isPresented: $isShowingAddNew, onDismiss: {
+            viewModel.fetchLists()
+        }) {
+            NewListView()
         }
         .onAppear {
             viewModel.fetchLists()
         }
+    }
+    
+    private var addNewButton: some View {
+        Button(action: {
+            isShowingAddNew = true
+        }, label: {
+            Image(systemName: "plus")
+        })
     }
 }
 

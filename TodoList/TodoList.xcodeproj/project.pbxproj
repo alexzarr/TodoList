@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A001499F25D740F000FA7A2A /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A001499E25D740F000FA7A2A /* NewListViewModel.swift */; };
+		A00149A025D740F000FA7A2A /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A001499E25D740F000FA7A2A /* NewListViewModel.swift */; };
+		A00149A725D7413B00FA7A2A /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149A625D7413B00FA7A2A /* NewListView.swift */; };
+		A00149A825D7413B00FA7A2A /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149A625D7413B00FA7A2A /* NewListView.swift */; };
 		A0226BC225BFA424006C7395 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAF25BFA421006C7395 /* TodoListApp.swift */; };
 		A0226BC325BFA424006C7395 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAF25BFA421006C7395 /* TodoListApp.swift */; };
 		A0226BC625BFA424006C7395 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0226BB125BFA424006C7395 /* Assets.xcassets */; };
@@ -46,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A001499E25D740F000FA7A2A /* NewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewModel.swift; sourceTree = "<group>"; };
+		A00149A625D7413B00FA7A2A /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		A0226BAF25BFA421006C7395 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
 		A0226BB125BFA424006C7395 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0226BB625BFA424006C7395 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A00149A325D740F900FA7A2A /* NewList */ = {
+			isa = PBXGroup;
+			children = (
+				A00149A625D7413B00FA7A2A /* NewListView.swift */,
+				A001499E25D740F000FA7A2A /* NewListViewModel.swift */,
+			);
+			path = NewList;
+			sourceTree = "<group>";
+		};
 		A0226BA925BFA421006C7395 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +122,7 @@
 				A0226BD225BFA4D7006C7395 /* Model */,
 				A0226BAF25BFA421006C7395 /* TodoListApp.swift */,
 				A072029225D5B7080090986A /* MyLists */,
+				A00149A325D740F900FA7A2A /* NewList */,
 				A072029525D5B7110090986A /* TaskList */,
 				A072029825D5B7190090986A /* NewTask */,
 				A0226BB125BFA424006C7395 /* Assets.xcassets */,
@@ -304,11 +320,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0CBD38425C5E2BD00506845 /* NewTaskViewModel.swift in Sources */,
+				A001499F25D740F000FA7A2A /* NewListViewModel.swift in Sources */,
 				A0226BD425BFA53D006C7395 /* TLTask.swift in Sources */,
 				A072028925D5B2470090986A /* MyListsViewModel.swift in Sources */,
 				A0226BDC25BFA58F006C7395 /* DataManager.swift in Sources */,
 				A072027825D5B1360090986A /* TLList.swift in Sources */,
 				A0226BE325BFA6E6006C7395 /* TaskListViewModel.swift in Sources */,
+				A00149A725D7413B00FA7A2A /* NewListView.swift in Sources */,
 				A072028E25D5B6B90090986A /* MyListsRow.swift in Sources */,
 				A053307925CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */,
@@ -328,11 +346,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0CBD38525C5E2BD00506845 /* NewTaskViewModel.swift in Sources */,
+				A00149A025D740F000FA7A2A /* NewListViewModel.swift in Sources */,
 				A0226BD525BFA53D006C7395 /* TLTask.swift in Sources */,
 				A072028A25D5B2470090986A /* MyListsViewModel.swift in Sources */,
 				A0226BDD25BFA58F006C7395 /* DataManager.swift in Sources */,
 				A072027925D5B1360090986A /* TLList.swift in Sources */,
 				A0226BE425BFA6E6006C7395 /* TaskListViewModel.swift in Sources */,
+				A00149A825D7413B00FA7A2A /* NewListView.swift in Sources */,
 				A072028F25D5B6B90090986A /* MyListsRow.swift in Sources */,
 				A053307A25CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38A25C5E48D00506845 /* NewTaskView.swift in Sources */,

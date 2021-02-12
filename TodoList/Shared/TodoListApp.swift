@@ -15,7 +15,7 @@ struct TodoListApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TaskListView()
+            MyListsView()
                 .environment(\.managedObjectContext, coreDataHelper.persistentContainer.viewContext)
         }
         .onChange(of: scenePhase) { phase in
