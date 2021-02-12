@@ -16,21 +16,21 @@ struct MyListsView: View {
         NavigationView {
             List(viewModel.lists) { list in
                 NavigationLink(
-                    destination: TaskListView(),
+                    destination: TaskListView(viewModel: .init(list: list)),
                     label: {
                         MyListsRow(list: list)
                     })
             }
             .navigationTitle(Text("Lists"))
             .navigationBarItems(trailing: addNewButton)
+            .onAppear {
+                viewModel.fetchLists()
+            }
         }
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
             viewModel.fetchLists()
         }) {
             NewListView()
-        }
-        .onAppear {
-            viewModel.fetchLists()
         }
     }
     

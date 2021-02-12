@@ -11,6 +11,7 @@ struct TLList {
     var id = UUID()
     var title: String
     var tasks: [TLTask] = []
+    var addedOn = Date()
 }
 
 // MARK: - Identifiable

@@ -12,6 +12,7 @@ struct TLTask {
     var title: String
     var isCompleted = false
     var list: TLList?
+    var addedOn = Date()
 }
 
 // MARK: - Identifiable

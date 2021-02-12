@@ -13,9 +13,11 @@ protocol NewTaskViewModelProtocol {
 }
 
 final class NewTaskViewModel: ObservableObject {
+    private let list: TLList?
     private var dataManager: DataManagerProtocol
     
-    init(dataManager: DataManagerProtocol = DataManager.shared) {
+    init(list: TLList?, dataManager: DataManagerProtocol = DataManager.shared) {
+        self.list = list
         self.dataManager = dataManager
     }
 }
@@ -23,6 +25,6 @@ final class NewTaskViewModel: ObservableObject {
 // MARK: - NewTaskViewModelProtocol
 extension NewTaskViewModel: NewTaskViewModelProtocol {
     func addNewTask(title: String) {
-        dataManager.addTask(title: title)
+        dataManager.addTask(title: title, to: list)
     }
 }

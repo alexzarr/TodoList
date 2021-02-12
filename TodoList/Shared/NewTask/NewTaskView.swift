@@ -10,7 +10,7 @@ import SwiftUI
 struct NewTaskView: View {
     @Environment(\.presentationMode) private var presentationMode
     
-    @StateObject var viewModel = NewTaskViewModel()
+    @StateObject var viewModel: NewTaskViewModel
     
     @State private var title = ""
     
@@ -56,7 +56,7 @@ struct NewTaskView: View {
 
 struct NewTaskView_Previews: PreviewProvider {
     static var viewModel: NewTaskViewModel {
-        NewTaskViewModel(dataManager: MockDataManager())
+        NewTaskViewModel(list: nil, dataManager: MockDataManager())
     }
     static var previews: some View {
         NewTaskView(viewModel: viewModel)

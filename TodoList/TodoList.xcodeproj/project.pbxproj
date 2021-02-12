@@ -11,6 +11,8 @@
 		A00149A025D740F000FA7A2A /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A001499E25D740F000FA7A2A /* NewListViewModel.swift */; };
 		A00149A725D7413B00FA7A2A /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149A625D7413B00FA7A2A /* NewListView.swift */; };
 		A00149A825D7413B00FA7A2A /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149A625D7413B00FA7A2A /* NewListView.swift */; };
+		A00149AF25D7454800FA7A2A /* ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149AE25D7454800FA7A2A /* ListEntity.swift */; };
+		A00149B025D7454800FA7A2A /* ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00149AE25D7454800FA7A2A /* ListEntity.swift */; };
 		A0226BC225BFA424006C7395 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAF25BFA421006C7395 /* TodoListApp.swift */; };
 		A0226BC325BFA424006C7395 /* TodoListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0226BAF25BFA421006C7395 /* TodoListApp.swift */; };
 		A0226BC625BFA424006C7395 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0226BB125BFA424006C7395 /* Assets.xcassets */; };
@@ -52,6 +54,8 @@
 /* Begin PBXFileReference section */
 		A001499E25D740F000FA7A2A /* NewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewModel.swift; sourceTree = "<group>"; };
 		A00149A625D7413B00FA7A2A /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
+		A00149AD25D7429900FA7A2A /* TodoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TodoList 2.xcdatamodel"; sourceTree = "<group>"; };
+		A00149AE25D7454800FA7A2A /* ListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntity.swift; sourceTree = "<group>"; };
 		A0226BAF25BFA421006C7395 /* TodoListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListApp.swift; sourceTree = "<group>"; };
 		A0226BB125BFA424006C7395 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0226BB625BFA424006C7395 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 				A049A06725CB502F00415C2D /* DBHelper.swift */,
 				A049A06C25CB51B500415C2D /* CoreDataHelper.swift */,
 				A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */,
+				A00149AE25D7454800FA7A2A /* ListEntity.swift */,
 				A053307825CC910B00E2E111 /* TaskEntity.swift */,
 			);
 			path = Persistence;
@@ -189,8 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				A072028325D5B2240090986A /* MyListsView.swift */,
-				A072028D25D5B6B90090986A /* MyListsRow.swift */,
 				A072028825D5B2470090986A /* MyListsViewModel.swift */,
+				A072028D25D5B6B90090986A /* MyListsRow.swift */,
 			);
 			path = MyLists;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				A053307925CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */,
 				A0D8AE5925BFC4B10073CD39 /* MockDataManager.swift in Sources */,
+				A00149AF25D7454800FA7A2A /* ListEntity.swift in Sources */,
 				A049A05D25CB486E00415C2D /* TaskRow.swift in Sources */,
 				A049A06825CB502F00415C2D /* DBHelper.swift in Sources */,
 				A049A06D25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
@@ -357,6 +363,7 @@
 				A053307A25CC910B00E2E111 /* TaskEntity.swift in Sources */,
 				A0CBD38A25C5E48D00506845 /* NewTaskView.swift in Sources */,
 				A0D8AE5A25BFC4B10073CD39 /* MockDataManager.swift in Sources */,
+				A00149B025D7454800FA7A2A /* ListEntity.swift in Sources */,
 				A049A05E25CB486E00415C2D /* TaskRow.swift in Sources */,
 				A049A06925CB502F00415C2D /* DBHelper.swift in Sources */,
 				A049A06E25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
@@ -610,9 +617,10 @@
 		A053306F25CC905200E2E111 /* TodoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A00149AD25D7429900FA7A2A /* TodoList 2.xcdatamodel */,
 				A053307025CC905200E2E111 /* TodoList.xcdatamodel */,
 			);
-			currentVersion = A053307025CC905200E2E111 /* TodoList.xcdatamodel */;
+			currentVersion = A00149AD25D7429900FA7A2A /* TodoList 2.xcdatamodel */;
 			path = TodoList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

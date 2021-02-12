@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskListView: View {
-    @StateObject var viewModel = TaskListViewModel()
+    @StateObject var viewModel: TaskListViewModel
     
     @State private var isShowingAddNew = false
     
@@ -21,12 +21,12 @@ struct TaskListView: View {
             }
         }
         .animation(.easeIn)
-        .navigationTitle(Text("Tasks"))
+        .navigationTitle(viewModel.title)
         .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
             viewModel.fetchTasks()
         }) {
-            NewTaskView()
+            NewTaskView(viewModel: .init(list: viewModel.list))
         }
         .onAppear {
             viewModel.fetchTasks()
@@ -52,7 +52,7 @@ struct TaskListView: View {
 
 struct TaskListView_Previews: PreviewProvider {
     static var viewModel: TaskListViewModel {
-        TaskListViewModel(dataManager: MockDataManager())
+        TaskListViewModel(list: TLList(title: "Groceries"), dataManager: MockDataManager())
     }
     static var previews: some View {
         NavigationView {
