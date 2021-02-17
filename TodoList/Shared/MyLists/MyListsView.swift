@@ -16,15 +16,28 @@ struct MyListsView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.lists) { list in
-                    NavigationLink(
-                        destination: TaskListView(viewModel: .init(list: list)),
-                        label: {
-                            MyListsRow(list: list)
+            Group {
+                if viewModel.lists.isEmpty {
+                    VStack(spacing: 12.0) {
+                        Text("No Lists")
+                        Button(action: {
+                            isShowingAddNew = true
+                        }, label: {
+                            Text("Start by adding a new list")
                         })
+                    }
+                } else {
+                    List {
+                        ForEach(viewModel.lists) { list in
+                            NavigationLink(
+                                destination: TaskListView(viewModel: .init(list: list)),
+                                label: {
+                                    MyListsRow(list: list)
+                                })
+                        }
+                        .onDelete(perform: deleteItem)
+                    }
                 }
-                .onDelete(perform: deleteItem)
             }
             .navigationTitle(Text("Lists"))
             .navigationBarItems(trailing: addNewButton)
