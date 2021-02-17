@@ -13,12 +13,15 @@ struct TaskListView: View {
     @State private var isShowingAddNew = false
     
     var body: some View {
-        List(viewModel.tasks) { task in
-            Button(action: {
-                viewModel.toggleIsCompleted(for: task)
-            }) {
-                TaskRow(task: task)
+        List {
+            ForEach(viewModel.tasks) { task in
+                Button(action: {
+                    viewModel.toggleIsCompleted(for: task)
+                }) {
+                    TaskRow(task: task)
+                }
             }
+            .onDelete(perform: deleteItem)
         }
         .animation(.easeIn)
         .navigationTitle(viewModel.title)
@@ -47,6 +50,10 @@ struct TaskListView: View {
         }) {
             Image(systemName: viewModel.showCompleted ? "text.justify" : "text.badge.checkmark")
         }
+    }
+    
+    private func deleteItem(at indexSet: IndexSet) {
+        viewModel.delete(at: indexSet)
     }
 }
 

@@ -13,6 +13,7 @@ protocol TaskListViewModelProtocol {
     var showCompleted: Bool { get set }
     func fetchTasks()
     func toggleIsCompleted(for task: TLTask)
+    func delete(at indexSet: IndexSet)
 }
 
 final class TaskListViewModel: ObservableObject {
@@ -42,6 +43,13 @@ extension TaskListViewModel: TaskListViewModelProtocol {
     
     func toggleIsCompleted(for task: TLTask) {
         dataManager.toggleIsCompleted(for: task)
+        fetchTasks()
+    }
+    
+    func delete(at indexSet: IndexSet) {
+        for index in indexSet {
+            dataManager.delete(task: tasks[index])
+        }
         fetchTasks()
     }
 }

@@ -12,6 +12,7 @@ protocol TaskDataManagerProtocol {
     func fetchTaskList(for list: TLList?, includingCompleted: Bool) -> [TLTask]
     func addTask(title: String, to list: TLList?)
     func toggleIsCompleted(for task: TLTask)
+    func delete(task: TLTask)
 }
 
 extension TaskDataManagerProtocol {
@@ -22,6 +23,7 @@ extension TaskDataManagerProtocol {
 protocol ListDataManagerProtocol {
     func fetchLists() -> [TLList]
     func addList(title: String)
+    func delete(list: TLList)
 }
 
 typealias DataManagerProtocol = TaskDataManagerProtocol & ListDataManagerProtocol
@@ -93,6 +95,11 @@ extension DataManager: TaskDataManagerProtocol {
         taskEntity.isCompleted.toggle()
         dbHelper.update(taskEntity)
     }
+    
+    func delete(task: TLTask) {
+        guard let taskEntity = fetchTaskEntity(for: task) else { return }
+        dbHelper.delete(taskEntity)
+    }
 }
 
 // MARK: - ListDataManagerProtocol
@@ -115,5 +122,10 @@ extension DataManager: ListDataManagerProtocol {
         newList.addedOn = Date()
         newList.tasks = Set()
         dbHelper.create(newList)
+    }
+    
+    func delete(list: TLList) {
+        guard let listEntity = fetchListEntity(for: list) else { return }
+        dbHelper.delete(listEntity)
     }
 }

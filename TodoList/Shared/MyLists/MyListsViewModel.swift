@@ -11,6 +11,7 @@ import Combine
 protocol MyListsViewModelProtocol {
     var lists: [TLList] { get }
     func fetchLists()
+    func delete(at indexSet: IndexSet)
 }
 
 final class MyListsViewModel: ObservableObject {
@@ -27,5 +28,12 @@ final class MyListsViewModel: ObservableObject {
 extension MyListsViewModel: MyListsViewModelProtocol {
     func fetchLists() {
         lists = dataManager.fetchLists()
+    }
+    
+    func delete(at indexSet: IndexSet) {
+        for index in indexSet {
+            dataManager.delete(list: lists[index])
+        }
+        fetchLists()
     }
 }

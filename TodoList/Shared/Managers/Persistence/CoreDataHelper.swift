@@ -43,11 +43,7 @@ final class CoreDataHelper {
 
 extension CoreDataHelper: DBHelper {
     func create(_ object: NSManagedObject) {
-        do {
-            try context.save()
-        } catch {
-            fatalError("error saving context: \(error)")
-        }
+        saveContext()
     }
     
     func read<T: NSManagedObject>(_ objectType: T.Type, predicate: NSPredicate?, limit: Int? = nil) -> Result<[T], Error> {
@@ -78,14 +74,11 @@ extension CoreDataHelper: DBHelper {
     }
     
     func update<T: NSManagedObject>(_ object: T) {
-        do {
-            try context.save()
-        } catch {
-            fatalError("error updating context: \(error)")
-        }
+        saveContext()
     }
     
     func delete<T: NSManagedObject>(_ object: T) {
         context.delete(object)
+        saveContext()
     }
 }

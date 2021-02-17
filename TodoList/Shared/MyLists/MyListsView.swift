@@ -12,17 +12,29 @@ struct MyListsView: View {
     
     @State private var isShowingAddNew = false
     
+    @State private var indexSetToDelete: IndexSet?
+    
     var body: some View {
         NavigationView {
-            List(viewModel.lists) { list in
-                NavigationLink(
-                    destination: TaskListView(viewModel: .init(list: list)),
-                    label: {
-                        MyListsRow(list: list)
-                    })
+            List {
+                ForEach(viewModel.lists) { list in
+                    NavigationLink(
+                        destination: TaskListView(viewModel: .init(list: list)),
+                        label: {
+                            MyListsRow(list: list)
+                        })
+                }
+                .onDelete(perform: deleteItem)
             }
             .navigationTitle(Text("Lists"))
             .navigationBarItems(trailing: addNewButton)
+            .alert(item: $indexSetToDelete) { indexSet in
+                Alert(title: Text("Are you sure want to remove this list?"),
+                      primaryButton: .destructive(Text("Delete"), action: {
+                        viewModel.delete(at: indexSet)
+                      }),
+                      secondaryButton: .cancel())
+            }
             .onAppear {
                 viewModel.fetchLists()
             }
@@ -40,6 +52,10 @@ struct MyListsView: View {
         }, label: {
             Image(systemName: "plus")
         })
+    }
+    
+    private func deleteItem(at indexSet: IndexSet) {
+        indexSetToDelete = indexSet
     }
 }
 
