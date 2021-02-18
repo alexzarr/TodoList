@@ -41,6 +41,8 @@
 		A072028A25D5B2470090986A /* MyListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072028825D5B2470090986A /* MyListsViewModel.swift */; };
 		A072028E25D5B6B90090986A /* MyListsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072028D25D5B6B90090986A /* MyListsRow.swift */; };
 		A072028F25D5B6B90090986A /* MyListsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072028D25D5B6B90090986A /* MyListsRow.swift */; };
+		A098765325DF23F900F3AADB /* MyListsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098765225DF23F900F3AADB /* MyListsItem.swift */; };
+		A098765425DF23F900F3AADB /* MyListsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098765225DF23F900F3AADB /* MyListsItem.swift */; };
 		A0CBD38425C5E2BD00506845 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */; };
 		A0CBD38525C5E2BD00506845 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */; };
 		A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38825C5E48D00506845 /* NewTaskView.swift */; };
@@ -76,6 +78,7 @@
 		A072028325D5B2240090986A /* MyListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsView.swift; sourceTree = "<group>"; };
 		A072028825D5B2470090986A /* MyListsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsViewModel.swift; sourceTree = "<group>"; };
 		A072028D25D5B6B90090986A /* MyListsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsRow.swift; sourceTree = "<group>"; };
+		A098765225DF23F900F3AADB /* MyListsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsItem.swift; sourceTree = "<group>"; };
 		A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
 		A0CBD38825C5E48D00506845 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		A0D433F825DDCCA6007215C7 /* IndexSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexSet+Extensions.swift"; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 				A072028325D5B2240090986A /* MyListsView.swift */,
 				A072028825D5B2470090986A /* MyListsViewModel.swift */,
 				A072028D25D5B6B90090986A /* MyListsRow.swift */,
+				A098765225DF23F900F3AADB /* MyListsItem.swift */,
 			);
 			path = MyLists;
 			sourceTree = "<group>";
@@ -337,6 +341,7 @@
 			files = (
 				A0CBD38425C5E2BD00506845 /* NewTaskViewModel.swift in Sources */,
 				A001499F25D740F000FA7A2A /* NewListViewModel.swift in Sources */,
+				A098765325DF23F900F3AADB /* MyListsItem.swift in Sources */,
 				A0226BD425BFA53D006C7395 /* TLTask.swift in Sources */,
 				A072028925D5B2470090986A /* MyListsViewModel.swift in Sources */,
 				A0226BDC25BFA58F006C7395 /* DataManager.swift in Sources */,
@@ -378,6 +383,7 @@
 				A00149B025D7454800FA7A2A /* ListEntity.swift in Sources */,
 				A049A05E25CB486E00415C2D /* TaskRow.swift in Sources */,
 				A049A06925CB502F00415C2D /* DBHelper.swift in Sources */,
+				A098765425DF23F900F3AADB /* MyListsItem.swift in Sources */,
 				A049A06E25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
 				A072028525D5B2250090986A /* MyListsView.swift in Sources */,
 				A0226BC325BFA424006C7395 /* TodoListApp.swift in Sources */,

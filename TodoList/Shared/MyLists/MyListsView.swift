@@ -14,6 +14,8 @@ struct MyListsView: View {
     
     @State private var indexSetToDelete: IndexSet?
     
+    @AppStorage("hasGridAppearance") private var hasGridAppearance = true
+    
     var body: some View {
         NavigationView {
             Group {
@@ -27,20 +29,15 @@ struct MyListsView: View {
                         })
                     }
                 } else {
-                    List {
-                        ForEach(viewModel.lists) { list in
-                            NavigationLink(
-                                destination: TaskListView(viewModel: .init(list: list)),
-                                label: {
-                                    MyListsRow(list: list)
-                                })
-                        }
-                        .onDelete(perform: deleteItem)
+                    if hasGridAppearance {
+                        gridView
+                    } else {
+                        listView
                     }
                 }
             }
             .navigationTitle(Text("Lists"))
-            .navigationBarItems(trailing: addNewButton)
+            .navigationBarItems(leading: toggleAppearanceButton, trailing: addNewButton)
             .alert(item: $indexSetToDelete) { indexSet in
                 Alert(title: Text("Are you sure want to remove this list?"),
                       primaryButton: .destructive(Text("Delete"), action: {
@@ -59,11 +56,49 @@ struct MyListsView: View {
         }
     }
     
+    private var listView: some View {
+        List {
+            ForEach(viewModel.lists) { list in
+                NavigationLink(
+                    destination: TaskListView(viewModel: .init(list: list)),
+                    label: {
+                        MyListsRow(list: list)
+                    })
+            }
+            .onDelete(perform: deleteItem)
+        }
+    }
+    
+    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 16), count: 2)
+    
+    private var gridView: some View {
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 16.0) {
+                ForEach(viewModel.lists) { list in
+                    NavigationLink(
+                        destination: TaskListView(viewModel: .init(list: list)),
+                        label: {
+                            MyListsItem(list: list)
+                        })
+                }
+            }
+            .padding()
+        }
+    }
+    
     private var addNewButton: some View {
         Button(action: {
             isShowingAddNew = true
         }, label: {
             Image(systemName: "plus")
+        })
+    }
+    
+    private var toggleAppearanceButton: some View {
+        Button(action: {
+            hasGridAppearance.toggle()
+        }, label: {
+            Image(systemName: hasGridAppearance ? "text.justify" : "rectangle.grid.2x2.fill")
         })
     }
     
