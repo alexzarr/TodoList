@@ -13,14 +13,30 @@ struct TaskListView: View {
     @State private var isShowingAddNew = false
     
     var body: some View {
-        List(viewModel.tasks) { task in
-            Button(action: {
-                viewModel.toggleIsCompleted(for: task)
-            }) {
-                TaskRow(task: task)
+        Group {
+            if viewModel.tasks.isEmpty {
+                VStack(spacing: 12.0) {
+                    Text("No Tasks")
+                    Button(action: {
+                        isShowingAddNew = true
+                    }, label: {
+                        Text("Start by adding a new task")
+                    })
+                }
+            } else {
+                List {
+                    ForEach(viewModel.tasks) { task in
+                        Button(action: {
+                            viewModel.toggleIsCompleted(for: task)
+                        }) {
+                            TaskRow(task: task)
+                        }
+                    }
+                    .onDelete(perform: deleteItem)
+                }
+                .animation(.easeIn)
             }
         }
-        .animation(.easeIn)
         .navigationTitle(viewModel.title)
         .navigationBarItems(leading: showCompletedButton, trailing: addNewButton)
         .sheet(isPresented: $isShowingAddNew, onDismiss: {
@@ -47,6 +63,10 @@ struct TaskListView: View {
         }) {
             Image(systemName: viewModel.showCompleted ? "text.justify" : "text.badge.checkmark")
         }
+    }
+    
+    private func deleteItem(at indexSet: IndexSet) {
+        viewModel.delete(at: indexSet)
     }
 }
 

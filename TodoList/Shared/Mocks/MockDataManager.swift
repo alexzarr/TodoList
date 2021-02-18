@@ -33,11 +33,11 @@ class MockDataManager {
 
 // MARK: - TaskDataManagerProtocol
 extension MockDataManager: TaskDataManagerProtocol {
-    func fetchTaskList(includingCompleted: Bool) -> [TLTask] {
+    func fetchTaskList(for list: TLList? = nil, includingCompleted: Bool) -> [TLTask] {
         includingCompleted ? tasks : tasks.filter { !$0.isCompleted }
     }
     
-    func addTask(title: String) {
+    func addTask(title: String, to list: TLList? = nil) {
         let task = TLTask(title: title)
         tasks.insert(task, at: 0)
     }
@@ -45,6 +45,12 @@ extension MockDataManager: TaskDataManagerProtocol {
     func toggleIsCompleted(for task: TLTask) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index].isCompleted.toggle()
+        }
+    }
+    
+    func delete(task: TLTask) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks.remove(at: index)
         }
     }
 }
@@ -57,5 +63,11 @@ extension MockDataManager: ListDataManagerProtocol {
     func addList(title: String) {
         let list = TLList(title: title)
         lists.insert(list, at: 0)
+    }
+    
+    func delete(list: TLList) {
+        if let index = lists.firstIndex(where: { $0.id == list.id }) {
+            lists.remove(at: index)
+        }
     }
 }
