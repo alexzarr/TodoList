@@ -47,7 +47,6 @@
 		A0CBD38525C5E2BD00506845 /* NewTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */; };
 		A0CBD38925C5E48D00506845 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38825C5E48D00506845 /* NewTaskView.swift */; };
 		A0CBD38A25C5E48D00506845 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CBD38825C5E48D00506845 /* NewTaskView.swift */; };
-		A0D433F925DDCCA6007215C7 /* IndexSet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D433F825DDCCA6007215C7 /* IndexSet+Extensions.swift */; };
 		A0D8AE5325BFC4100073CD39 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8AE5225BFC4100073CD39 /* TaskListView.swift */; };
 		A0D8AE5425BFC4100073CD39 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8AE5225BFC4100073CD39 /* TaskListView.swift */; };
 		A0D8AE5925BFC4B10073CD39 /* MockDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8AE5825BFC4B10073CD39 /* MockDataManager.swift */; };
@@ -81,7 +80,6 @@
 		A098765225DF23F900F3AADB /* MyListsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsItem.swift; sourceTree = "<group>"; };
 		A0CBD38325C5E2BD00506845 /* NewTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewModel.swift; sourceTree = "<group>"; };
 		A0CBD38825C5E48D00506845 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
-		A0D433F825DDCCA6007215C7 /* IndexSet+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexSet+Extensions.swift"; sourceTree = "<group>"; };
 		A0D8AE5225BFC4100073CD39 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		A0D8AE5825BFC4B10073CD39 /* MockDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,7 +227,6 @@
 		A0D433F725DDCC95007215C7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A0D433F825DDCCA6007215C7 /* IndexSet+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -358,7 +355,6 @@
 				A049A06D25CB51B500415C2D /* CoreDataHelper.swift in Sources */,
 				A072028425D5B2250090986A /* MyListsView.swift in Sources */,
 				A0226BC225BFA424006C7395 /* TodoListApp.swift in Sources */,
-				A0D433F925DDCCA6007215C7 /* IndexSet+Extensions.swift in Sources */,
 				A0D8AE5325BFC4100073CD39 /* TaskListView.swift in Sources */,
 				A053307125CC905200E2E111 /* TodoList.xcdatamodeld in Sources */,
 			);
