@@ -12,7 +12,7 @@ struct MyListsView: View {
     
     @State private var isShowingAddNew = false
     
-    @State private var indexSetToDelete: IndexSet?
+    @State private var listToDelete: TLList?
     
     @AppStorage("hasGridAppearance") private var hasGridAppearance = true
     
@@ -38,10 +38,10 @@ struct MyListsView: View {
             }
             .navigationTitle(Text("Lists"))
             .navigationBarItems(leading: toggleAppearanceButton, trailing: addNewButton)
-            .alert(item: $indexSetToDelete) { indexSet in
+            .alert(item: $listToDelete) { list in
                 Alert(title: Text("Are you sure want to remove this list?"),
                       primaryButton: .destructive(Text("Delete"), action: {
-                        viewModel.delete(at: indexSet)
+                        viewModel.delete(list: list)
                       }),
                       secondaryButton: .cancel())
             }
@@ -80,6 +80,16 @@ struct MyListsView: View {
                         label: {
                             MyListsItem(list: list)
                         })
+                        .contextMenu(ContextMenu(menuItems: {
+                            Label("Add a task", systemImage: "plus.app")
+                            Label("Edit", systemImage: "pencil")
+                            Divider()
+                            Button(action: {
+                                delete(list: list)
+                            }, label: {
+                                Label("Delete", systemImage: "trash")
+                            })
+                        }))
                 }
             }
             .padding()
@@ -103,7 +113,12 @@ struct MyListsView: View {
     }
     
     private func deleteItem(at indexSet: IndexSet) {
-        indexSetToDelete = indexSet
+        guard let list = indexSet.map({ viewModel.lists[$0] }).first else { return }
+        delete(list: list)
+    }
+    
+    private func delete(list: TLList) {
+        listToDelete = list
     }
 }
 
