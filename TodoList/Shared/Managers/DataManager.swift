@@ -13,6 +13,7 @@ protocol TaskDataManagerProtocol {
     func addTask(title: String, to list: TLList?)
     func toggleIsCompleted(for task: TLTask)
     func delete(task: TLTask)
+    func update(task: TLTask)
 }
 
 extension TaskDataManagerProtocol {
@@ -72,7 +73,7 @@ extension DataManager: TaskDataManagerProtocol {
         let result: Result<[TaskEntity], Error> = dbHelper.read(TaskEntity.self, predicate: predicate, limit: nil)
         switch result {
         case .success(let taskEntities):
-            return taskEntities.map { $0.convertToTLTask() }
+            return taskEntities.map { $0.convertToTLTask(list: list) }
         case .failure(let error):
             fatalError(error.localizedDescription)
         }
@@ -99,6 +100,18 @@ extension DataManager: TaskDataManagerProtocol {
     func delete(task: TLTask) {
         guard let taskEntity = fetchTaskEntity(for: task) else { return }
         dbHelper.delete(taskEntity)
+    }
+    
+    func update(task: TLTask) {
+        guard let taskEntity = fetchTaskEntity(for: task) else { return }
+        taskEntity.title = task.title
+        taskEntity.isCompleted = task.isCompleted
+        if let list = task.list {
+            taskEntity.list = fetchListEntity(for: list)
+        } else {
+            taskEntity.list = nil
+        }
+        dbHelper.update(taskEntity)
     }
 }
 
