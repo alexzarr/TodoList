@@ -10,12 +10,34 @@ import SwiftUI
 struct EditTaskView: View {
     @StateObject var viewModel: EditTaskViewModel
     
+    @State private var showingListPicker = false
+    
     var body: some View {
         Form {
             Section(header: Text("Task Details")) {
                 TextField("Task Name", text: $viewModel.title)
-                if let list = viewModel.list {
-                    Text(list.title)
+                Button {
+                    showingListPicker.toggle()
+                } label: {
+                    HStack {
+                        Text("List")
+                        Spacer()
+                        if let list = viewModel.list {
+                            Text(list.title)
+                        } else {
+                            Text("No list")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .foregroundColor(.primary)
+                }
+                if showingListPicker {
+                    Picker("Select a List", selection: $viewModel.selectedListIndex) {
+                        ForEach(0..<viewModel.lists.count) { i in
+                            Text(viewModel.lists[i].title)
+                        }
+                    }
+                    .pickerStyle(WheelPickerStyle())
                 }
             }
         }

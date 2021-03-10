@@ -14,7 +14,7 @@ struct MyListsRow: View {
         HStack {
             Text(list.title)
             Spacer()
-            Text("\(list.tasks.count)")
+            Text("\(list.tasks.filter { !$0.isCompleted }.count)")
                 .foregroundColor(.secondary)
         }
     }
