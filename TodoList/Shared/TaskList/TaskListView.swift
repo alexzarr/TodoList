@@ -26,10 +26,11 @@ struct TaskListView: View {
             } else {
                 List {
                     ForEach(viewModel.tasks) { task in
-                        Button(action: {
-                            viewModel.toggleIsCompleted(for: task)
-                        }) {
-                            TaskRow(task: task)
+                        NavigationLink(
+                            destination: EditTaskView(viewModel: EditTaskViewModel(task: task))) {
+                            TaskRow(task: task) {
+                                viewModel.toggleIsCompleted(for: task)
+                            }
                         }
                     }
                     .onDelete(perform: deleteItem)

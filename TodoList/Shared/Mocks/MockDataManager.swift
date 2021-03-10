@@ -53,6 +53,12 @@ extension MockDataManager: TaskDataManagerProtocol {
             tasks.remove(at: index)
         }
     }
+    
+    func update(task: TLTask) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index] = task
+        }
+    }
 }
 
 extension MockDataManager: ListDataManagerProtocol {

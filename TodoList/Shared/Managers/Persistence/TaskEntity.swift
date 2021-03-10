@@ -18,7 +18,7 @@ final class TaskEntity: NSManagedObject {
 }
 
 extension TaskEntity {
-    func convertToTLTask() -> TLTask {
-        TLTask(id: id ?? UUID(), title: title, isCompleted: isCompleted, addedOn: addedOn)
+    func convertToTLTask(list: TLList?) -> TLTask {
+        TLTask(id: id ?? UUID(), title: title, isCompleted: isCompleted, list: list, addedOn: addedOn)
     }
 }

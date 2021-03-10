@@ -18,6 +18,9 @@ final class ListEntity: NSManagedObject {
 
 extension ListEntity {
     func convertToTLList() -> TLList {
-        TLList(id: id ?? UUID(), title: title, tasks: Array(tasks.map { $0.convertToTLTask() }), addedOn: addedOn)
+        var list = TLList(id: id ?? UUID(), title: title, tasks: [], addedOn: addedOn)
+        let tasks = Array(self.tasks.map { $0.convertToTLTask(list: list) })
+        list.tasks = tasks
+        return list
     }
 }
