@@ -16,3 +16,10 @@ struct TLList {
 
 // MARK: - Identifiable
 extension TLList: Identifiable { }
+
+// MARK: - Hashable
+extension TLList: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
+}

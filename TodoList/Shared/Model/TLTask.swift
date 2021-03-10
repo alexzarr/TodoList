@@ -17,3 +17,10 @@ struct TLTask {
 
 // MARK: - Identifiable
 extension TLTask: Identifiable { }
+
+// MARK: - Hashable
+extension TLTask: Hashable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
+}

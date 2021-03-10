@@ -14,7 +14,7 @@ struct MyListsItem: View {
     
     var body: some View {
         VStack(alignment: .trailing) {
-            Text("\(list.tasks.count)")
+            Text("\(list.tasks.filter { !$0.isCompleted }.count)")
                 .font(.title)
                 .bold()
                 .foregroundColor(.primary)
